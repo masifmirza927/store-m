@@ -13,22 +13,13 @@ import { Routes, Route } from 'react-router-dom';
 function App() {
   const [products, setProducts] = useState([]);
 
+  // fetching data from api
   useEffect(() => {
-
     fetch("https://fakestoreapi.com/products").then((data) => {
       return data.json();
-
     }).then((res) => {
-
       setProducts(res);
-      console.log(res)
-
-    }).catch((err) => {
-
-      console.log(err);
-
-    })
-
+    }).catch((err) => { console.log(err) })\
   }, []);
 
 
