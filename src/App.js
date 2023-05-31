@@ -1,11 +1,17 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Contact from "./pages/Contact"
+import Home from "./pages/Home"
+import Categories from "./pages/Categories"
+import Cart from "./pages/Cart"
+
+import { Routes, Route } from 'react-router-dom';
+
 function App() {
   const [products, setProducts] = useState([]);
-
-
-
 
   useEffect(() => {
 
@@ -28,25 +34,16 @@ function App() {
 
   return (
     <div className="container">
-      <h1>Our Products</h1>
-      <div className='row'>
-        {
-          products.map((product) => {
-            return (
-              <div className='col-md-3' style={{ marginBottom: "10px" }}>
-                <div className="card" style={{width: "18rem"}}>
-                  <img src={product.image} className="card-img-top" alt="..." style={{ width: "100%", height: '150px' }} />
-                    <div className="card-body">
-                      <h5 className="card-title text-truncate">{product.title}</h5>
-                      <p className="card-text"><h2>${product.price}</h2></p>
-                      <a href="#" className="btn btn-primary">Add to cart</a>
-                    </div>
-                </div>
-              </div>
-            )
-          })
-        }
-      </div>
+      <Header />
+
+        <Routes>
+          <Route path='/' element={<Home products={products} />} />
+          <Route path='/categories' element={<Categories />} />
+          <Route path='/contact' element={<Contact />} />
+          <Route path='/cart' element={<Cart />} />
+        </Routes>
+
+      <Footer />
     </div>
   );
 }
