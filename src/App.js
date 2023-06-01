@@ -7,6 +7,7 @@ import Contact from "./pages/Contact"
 import Home from "./pages/Home"
 import Categories from "./pages/Categories"
 import Cart from "./pages/Cart"
+import ProductDetails from './pages/ProductDetails';
 
 import { Routes, Route } from 'react-router-dom';
 
@@ -19,7 +20,7 @@ function App() {
       return data.json();
     }).then((res) => {
       setProducts(res);
-    }).catch((err) => { console.log(err) })\
+    }).catch((err) => { console.log(err) })
   }, []);
 
 
@@ -32,6 +33,7 @@ function App() {
           <Route path='/categories' element={<Categories />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/product/:id' element={<ProductDetails />} />
         </Routes>
 
       <Footer />

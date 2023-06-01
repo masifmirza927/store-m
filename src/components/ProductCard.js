@@ -1,5 +1,5 @@
 
-
+import { Link } from "react-router-dom"
 
 function ProductCard(props) {
     
@@ -10,7 +10,8 @@ function ProductCard(props) {
             <div className="card-body">
               <h5 className="card-title text-truncate">{props.product.title}</h5>
               <p className="card-text">${props.product.price}</p>
-              <a href="#" className="btn btn-primary">Add to cart</a>
+              <a href="#" className="btn btn-primary mx-2">Add to cart</a>
+              <Link to={`/product/${props.product.id}`} className="btn btn-primary">View</Link>
             </div>
         </div>
       </div>
