@@ -13,6 +13,7 @@ import { Routes, Route } from 'react-router-dom';
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [cart, setCart] = useState([]);
   const [query, setQuery] = useState("");
 
@@ -22,6 +23,7 @@ function App() {
       return data.json();
     }).then((res) => {
       setProducts(res);
+      setFilteredProducts(res);
     }).catch((err) => { console.log(err) })
   }, []);
 
@@ -39,7 +41,7 @@ const searchproducts = (search) => {
   const newAr = products.filter( (item) => {
     return item.title.toLowerCase().includes(search.toLowerCase());
   });
-  setProducts(newAr);
+  setFilteredProducts(newAr);
 }
 
 
@@ -48,7 +50,7 @@ const searchproducts = (search) => {
       <Header cart={cart} />
     <input  type='text' onChange={(e) => searchproducts(e.target.value)} />
         <Routes>
-          <Route path='/' element={<Home addToCart={addToCart} products={products} />} />
+          <Route path='/' element={<Home addToCart={addToCart} products={filteredProducts} />} />
           <Route path='/categories' element={<Categories />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/cart' element={<Cart />} />
