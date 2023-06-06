@@ -12,7 +12,7 @@ function Home(props) {
                     {
                         props.products.map((product) => {
                             return (
-                                <ProductCard product={product} key={product.id} />
+                                <ProductCard addToCart={props.addToCart} product={product} key={product.id} />
                             )
                         })
                     }

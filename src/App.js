@@ -13,6 +13,8 @@ import { Routes, Route } from 'react-router-dom';
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [query, setQuery] = useState("");
 
   // fetching data from api
   useEffect(() => {
@@ -23,13 +25,30 @@ function App() {
     }).catch((err) => { console.log(err) })
   }, []);
 
+const addToCart = (product) => {
+   const newAr = [...cart, product];
+   setCart(newAr);
+}  
+
+const removeFromCart = (index) => {
+  const newAr = cart.toSpliced(index, 1);
+  setCart(newAr);
+}  
+
+const searchproducts = (search) => {
+  const newAr = products.filter( (item) => {
+    return item.title.toLowerCase().includes(search.toLowerCase());
+  });
+  setProducts(newAr);
+}
+
 
   return (
     <div className="container">
-      <Header />
-
+      <Header cart={cart} />
+    <input  type='text' onChange={(e) => searchproducts(e.target.value)} />
         <Routes>
-          <Route path='/' element={<Home products={products} />} />
+          <Route path='/' element={<Home addToCart={addToCart} products={products} />} />
           <Route path='/categories' element={<Categories />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/cart' element={<Cart />} />
